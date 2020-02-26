@@ -45,9 +45,7 @@ jobs:
   #    $(Build.SourcesDirectory)\sdk.msi /passive
 
   - script: |
-      conda config --add channels conda-forge
-      conda config --set channel_priority strict
-      conda create --yes --quiet --name colcon -f src\Azure_Kinect_ROS_Driver\environment.yml
+      conda create -f src\Azure_Kinect_ROS_Driver\environment.yml
       call activate colcon
       mkdir src\deps
       vcs import .\src\deps < src\Azure_Kinect_ROS_Driver\deps.rosinstall
