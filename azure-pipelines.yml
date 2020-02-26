@@ -54,7 +54,7 @@ jobs:
       set ROS_PYTHON_VERSION=3
       pushd %PIPELINE_WORKSPACE%
       conda env create --prefix ./colcon -f src\Azure_Kinect_ROS_Driver\environment.yaml
-      call activate colcon
+      call activate ./colcon
       mkdir src\deps
       vcs import .\src\deps < src\Azure_Kinect_ROS_Driver\deps.rosinstall
       pushd .\src\deps\catkin
