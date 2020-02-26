@@ -45,6 +45,7 @@ jobs:
   #    $(Build.SourcesDirectory)\sdk.msi /passive
 
   - script: |
+      pushd %PIPELINE_WORKSPACE%
       conda env create -f src\Azure_Kinect_ROS_Driver\environment.yml
       call activate colcon
       mkdir src\deps
