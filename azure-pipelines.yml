@@ -40,9 +40,9 @@ jobs:
     displayName: Add conda to PATH
 
   # Download and install the Azure Kinect Sensor SDK 
-  # - powershell: |
-  #    wget http://download.microsoft.com/download/1/9/8/198048e8-63f2-45c6-8f96-1fd541d1b4bc/Azure%20Kinect%20SDK%201.2.0.msi -OutFile $(Build.SourcesDirectory)\sdk.msi
-  #    $(Build.SourcesDirectory)\sdk.msi /passive
+  - powershell: |
+      wget http://download.microsoft.com/download/1/9/8/198048e8-63f2-45c6-8f96-1fd541d1b4bc/Azure%20Kinect%20SDK%201.2.0.msi -OutFile $(Build.SourcesDirectory)\sdk.msi
+      $(Build.SourcesDirectory)\sdk.msi /passive
 
   - script: |
       set CC=cl.exe
