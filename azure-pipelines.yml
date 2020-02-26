@@ -50,7 +50,8 @@ jobs:
       call activate colcon
       mkdir src\deps
       vcs import .\src\deps < src\Azure_Kinect_ROS_Driver\deps.rosinstall
-      set COLCON_HOME=%PIPELINE_WORKSPACE%\src\Azure_Kinect_ROS_Driver
+      set "COLCON_HOME=%PIPELINE_WORKSPACE%\src\Azure_Kinect_ROS_Driver"
+      call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
       colcon build
     displayName: Colcon build
 
