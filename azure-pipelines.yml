@@ -20,11 +20,11 @@ pr:
     - melodic
 
 jobs:
-- job: WindowsMelodic
-  displayName: Windows Melodic
+- job: WindowsNoetic
+  displayName: Windows Noetic
 
   pool:
-    vmImage: 'vs2017-win2016'
+    vmImage: 'windows-2019'
 
   steps:
   - checkout: self
@@ -33,36 +33,21 @@ jobs:
     lfs: false
     persistCredentials: true
     submodules: true
-    path: catkin_ws\src\Azure_Kinect_ROS_Driver
-
-  # Install Chcolatey
-  - powershell: Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-
-  # Install ROS
-  - powershell: |
-      choco source add -n=ros-win -s="https://roswin.azurewebsites.net/api/v2" --priority=1
-      choco upgrade ros-melodic-ros_base -y --execution-timeout=0
-
-  # Create a catkin workspace
-  - script: |
-      C:\opt\ros\melodic\x64\setup.bat
-      mkdir %BUILD_SOURCESDIRECTORY%\catkin_ws
-      mkdir %BUILD_SOURCESDIRECTORY%\catkin_ws\src
-      cd %BUILD_SOURCESDIRECTORY%\catkin_ws
-      catkin_make
-    displayName: Create Catkin Workspace
+    path: colcon_ws\src\Azure_Kinect_ROS_Driver
 
   # Download and install the Azure Kinect Sensor SDK 
   - powershell: |
       wget http://download.microsoft.com/download/1/9/8/198048e8-63f2-45c6-8f96-1fd541d1b4bc/Azure%20Kinect%20SDK%201.2.0.msi -OutFile $(Build.SourcesDirectory)\sdk.msi
       $(Build.SourcesDirectory)\sdk.msi /passive
 
-  # Build the catkin workspace
   - script: |
-      C:\opt\ros\melodic\x64\setup.bat
-      cd %BUILD_SOURCESDIRECTORY%\catkin_ws
-      catkin_make --force-cmake
-    displayName: Build ROS Driver Node
+      %CONDA%\conda env create -f colcon_ws\src\Azure_Kinect_ROS_Driver\environment.yml
+      %CONDA%\conda activate colcon
+      mkdir colcon_ws\src\deps
+      vcs import colcon_ws\src\deps < colcon_ws\src\Azure_Kinect_ROS_Driver\deps.rosinstall
+      set COLCON_HOME=colcon_ws\src\Azure_Kinect_ROS_Driver\
+      colcon build
+    displayName: Create Catkin Workspace
 
 - job: LinuxMelodic
   displayName: Linux Melodic
