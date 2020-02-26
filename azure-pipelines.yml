@@ -36,6 +36,9 @@ jobs:
     submodules: true
     path: colcon_ws\src\Azure_Kinect_ROS_Driver
 
+  - bash: echo "##vso[task.prependpath]$CONDA/bin"
+    displayName: Add conda to PATH
+
   # Download and install the Azure Kinect Sensor SDK 
   # - powershell: |
   #    wget http://download.microsoft.com/download/1/9/8/198048e8-63f2-45c6-8f96-1fd541d1b4bc/Azure%20Kinect%20SDK%201.2.0.msi -OutFile $(Build.SourcesDirectory)\sdk.msi
