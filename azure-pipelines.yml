@@ -45,7 +45,7 @@ jobs:
   #    $(Build.SourcesDirectory)\sdk.msi /passive
 
   - script: |
-      conda init cmd.exec
+      conda init cmd.exe
     displayName: Init conda
 
   - script: |
