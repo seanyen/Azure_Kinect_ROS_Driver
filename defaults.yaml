@@ -4,10 +4,11 @@
         "cmake-args": [
             "-G",
             "Ninja",
-            "-DCMAKE_PREFIX_PATH=./colcon/Library;./install",
+            "-DCMAKE_PREFIX_PATH=./colcon/Library;d:/install",
             "-DCATKIN_SKIP_TESTING=ON",
             "-DCMAKE_BUILD_TYPE=Release"],
         "event-handlers": ["console_cohesion+"],
+        "install-base": "d:/install",
         "parallel-workers" : 1,
         "merge-install": true
     }

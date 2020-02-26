@@ -88,7 +88,7 @@ jobs:
       set ROS_PYTHON_VERSION=3
       set "COLCON_HOME=%PIPELINE_WORKSPACE%\src\Azure_Kinect_ROS_Driver"
       call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-      colcon build --packages-select azure_kinect_ros_driver
+      colcon build --packages-up-to azure_kinect_ros_driver
     displayName: CI build
 
 - job: LinuxMelodic
