@@ -36,19 +36,22 @@ jobs:
     submodules: true
     path: src\Azure_Kinect_ROS_Driver
 
+  - powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
+    displayName: Add conda to PATH
+
   # Download and install the Azure Kinect Sensor SDK 
   # - powershell: |
   #    wget http://download.microsoft.com/download/1/9/8/198048e8-63f2-45c6-8f96-1fd541d1b4bc/Azure%20Kinect%20SDK%201.2.0.msi -OutFile $(Build.SourcesDirectory)\sdk.msi
   #    $(Build.SourcesDirectory)\sdk.msi /passive
 
-  - bash: |
-      $CONDA/bin/conda env create -f src/Azure_Kinect_ROS_Driver/environment.yml
-      $CONDA/bin/conda activate colcon
-      mkdir -p src/deps
-      vcs import ./src/deps < src/Azure_Kinect_ROS_Driver/deps.rosinstall
-      export COLCON_HOME=$PIPELINE_WORKSPACE/src/Azure_Kinect_ROS_Driver/
+  - script: |
+      conda create --yes --quiet -f src\Azure_Kinect_ROS_Driver\environment.yml
+      conda activate colcon
+      mkdir src\deps
+      vcs import .\src\deps < src\Azure_Kinect_ROS_Driver\deps.rosinstall
+      set COLCON_HOME=%PIPELINE_WORKSPACE%\src\Azure_Kinect_ROS_Driver
       colcon build
-    displayName: Create Catkin Workspace
+    displayName: Colcon Build
 
 - job: LinuxMelodic
   displayName: Linux Melodic
