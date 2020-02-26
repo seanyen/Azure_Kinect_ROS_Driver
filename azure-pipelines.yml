@@ -46,7 +46,7 @@ jobs:
 
   - script: |
       pushd %PIPELINE_WORKSPACE%
-      conda env create -f src\Azure_Kinect_ROS_Driver\environment.yml
+      conda env create -f src\Azure_Kinect_ROS_Driver\environment.yaml
       call activate colcon
       mkdir src\deps
       vcs import .\src\deps < src\Azure_Kinect_ROS_Driver\deps.rosinstall
