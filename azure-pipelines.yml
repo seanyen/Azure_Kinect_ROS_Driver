@@ -10,6 +10,7 @@ trigger:
     - master
     - develop
     - melodic
+    - seanyen/conda
 
 pr:
   autoCancel: true
