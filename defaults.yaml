@@ -4,13 +4,12 @@
         "cmake-args": [
             "-G",
             "Ninja",
-            "-DCMAKE_PREFIX_PATH=./colcon/Library;c:/install/ros",
+            "-DCMAKE_PREFIX_PATH=./colcon/Library;./install",
             "-DCATKIN_SKIP_TESTING=ON",
             "-DCMAKE_BUILD_TYPE=Release"],
         "event-handlers": ["console_cohesion+"],
-        "install-base": "c:/install/ros",
+        "install-base": "./install",
         "parallel-workers" : 1,
-        "merge-install": true,
-        "packages-up-to": ["azure_kinect_ros_driver"]
+        "merge-install": true
     }
 }

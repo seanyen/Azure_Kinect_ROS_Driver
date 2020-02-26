@@ -28,6 +28,13 @@ jobs:
     vmImage: 'windows-2019'
 
   steps:
+  - task: Cache@2
+    inputs:
+      key: mykey | mylockfile
+      restoreKeys: mykey
+      path: $(Pipeline.Workspace)
+      cacheHitVar: CACHE_RESTORED
+
   - checkout: self
     clean: "all"
     fetchDepth: 20
@@ -67,8 +74,22 @@ jobs:
       popd
       set "COLCON_HOME=%PIPELINE_WORKSPACE%\src\Azure_Kinect_ROS_Driver"
       call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-      colcon build
-    displayName: Colcon build
+      colcon build --packages-up-to azure_kinect_ros_driver
+    displayName: Cache build
+    condition: ne(variables.CACHE_RESTORED, 'true')
+
+  - script: |
+      set CC=cl.exe
+      set CXX=cl.exe
+      set Boost_ROOT=
+      set BOOST_ROOT_1_69_0=
+      set BOOST_ROOT_1_72_0=
+      set PATH=%PATH:C:\hostedtoolcache\windows\Boost\1.72.0;=%
+      set ROS_PYTHON_VERSION=3
+      set "COLCON_HOME=%PIPELINE_WORKSPACE%\src\Azure_Kinect_ROS_Driver"
+      call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+      colcon build --packages-select azure_kinect_ros_driver
+    displayName: CI build
 
 - job: LinuxMelodic
   displayName: Linux Melodic
