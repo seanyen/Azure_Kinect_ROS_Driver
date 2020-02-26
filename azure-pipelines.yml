@@ -45,13 +45,17 @@ jobs:
   #    $(Build.SourcesDirectory)\sdk.msi /passive
 
   - script: |
+      conda init cmd.exec
+    displayName: Init conda
+
+  - script: |
       conda create --yes --quiet --name colcon -f src\Azure_Kinect_ROS_Driver\environment.yml
       conda activate colcon
       mkdir src\deps
       vcs import .\src\deps < src\Azure_Kinect_ROS_Driver\deps.rosinstall
       set COLCON_HOME=%PIPELINE_WORKSPACE%\src\Azure_Kinect_ROS_Driver
       colcon build
-    displayName: Colcon Build
+    displayName: Colcon build
 
 - job: LinuxMelodic
   displayName: Linux Melodic
