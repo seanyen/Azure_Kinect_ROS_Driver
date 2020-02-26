@@ -57,9 +57,11 @@ jobs:
       mkdir src\deps
       vcs import .\src\deps < src\Azure_Kinect_ROS_Driver\deps.rosinstall
       pushd .\src\deps\catkin
+      echo catkin path
       git apply %PIPELINE_WORKSPACE%\src\Azure_Kinect_ROS_Driver\catkin.patch
       popd
       pushd .\src\deps\vision_opencv
+      echo vision_opencv path
       git apply %PIPELINE_WORKSPACE%\src\Azure_Kinect_ROS_Driver\vision_opencv.patch
       popd
       set "COLCON_HOME=%PIPELINE_WORKSPACE%\src\Azure_Kinect_ROS_Driver"
