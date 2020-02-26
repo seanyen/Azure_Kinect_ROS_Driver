@@ -1,0 +1,11 @@
+--- a/cmake/platform/windows.cmake
++++ b/cmake/platform/windows.cmake
+@@ -96,6 +96,8 @@ if(WIN32)
+   # keep minimum windows headers inclusion
+   add_definitions(-DWIN32_LEAN_AND_MEAN)
+
++  add_definitions(-DBOOST_ALL_DYN_LINK=1)
++
+   # explicitly enable C++ to compile wrapper
+   enable_language(CXX)
+ endif()
