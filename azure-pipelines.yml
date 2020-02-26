@@ -41,8 +41,8 @@ jobs:
       $(Build.SourcesDirectory)\sdk.msi /passive
 
   - script: |
-      %CONDA%\conda env create -f colcon_ws\src\Azure_Kinect_ROS_Driver\environment.yml
-      %CONDA%\conda activate colcon
+      conda env create -f colcon_ws\src\Azure_Kinect_ROS_Driver\environment.yml
+      conda activate colcon
       mkdir colcon_ws\src\deps
       vcs import colcon_ws\src\deps < colcon_ws\src\Azure_Kinect_ROS_Driver\deps.rosinstall
       set COLCON_HOME=colcon_ws\src\Azure_Kinect_ROS_Driver\
