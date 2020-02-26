@@ -51,6 +51,7 @@ jobs:
       set BOOST_ROOT_1_69_0=
       set BOOST_ROOT_1_72_0=
       set PATH=%PATH:C:\hostedtoolcache\windows\Boost\1.72.0;=%
+      set ROS_PYTHON_VERSION=3
       pushd %PIPELINE_WORKSPACE%
       conda env create -f src\Azure_Kinect_ROS_Driver\environment.yaml
       call activate colcon
