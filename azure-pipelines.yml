@@ -49,7 +49,7 @@ jobs:
     displayName: Init conda
 
   - script: |
-      conda create --yes --quiet --name colcon -f src\Azure_Kinect_ROS_Driver\environment.yml
+      conda create --yes --quiet --name colcon -c conda-forge -f src\Azure_Kinect_ROS_Driver\environment.yml
       conda activate colcon
       mkdir src\deps
       vcs import .\src\deps < src\Azure_Kinect_ROS_Driver\deps.rosinstall
