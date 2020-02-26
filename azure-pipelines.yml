@@ -45,6 +45,8 @@ jobs:
   #    $(Build.SourcesDirectory)\sdk.msi /passive
 
   - script: |
+      set CC=cl.exe
+      set CXX=cl.exe
       set Boost_ROOT=
       set BOOST_ROOT_1_69_0=
       set BOOST_ROOT_1_72_0=
